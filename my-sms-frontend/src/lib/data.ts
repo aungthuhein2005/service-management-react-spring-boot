@@ -18,7 +18,117 @@ export type Ticket = {
     description: string
     timestamp: string
   }
+  // CREATE TABLE users ( user_id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255) NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, phone VARCHAR(20), role ENUM('admin', 'technician', 'customer') NOT NULL, password_hash VARCHAR(255) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP )
+  export interface User {
+    id: number
+    name: string
+    email: string
+    phone: string | null
+    role: "admin" | "technician" | "customer"
+    createdAt: string
+  }
+
+  export const users: User[] = [
+    {
+      id: 101,
+      name: "John Doe",
+      email: "johndoe@gmail.com",
+      phone: "123-456-7890",
+      role: "technician",
+      createdAt: "2023-06-01T09:00:00Z",
+    },
+    {
+      id: 102,
+      name: "Jane Smith",
+      email: "janesmith@gmail.com",
+      phone: "234-567-8901",
+      role: "technician",
+      createdAt: "2023-06-02T14:30:00Z",
+    },
+    {
+      id: 103,
+      name: "Alice Johnson",
+      email: "alicejohnson@gmail.com",
+      phone: "345-678-9012",
+      role: "customer",
+      createdAt: "2023-06-03T11:00:00Z",
+    },
+    {
+      id: 104,
+      name: "Bob Brown",
+      email: "bobbrown@gmail.com",
+      phone: "456-789-0123",
+      role: "customer",
+      createdAt: "2023-06-04T12:00:00Z",
+    },
+    {
+      id: 105,
+      name: "Charlie Davis",
+      email: "charliedavis@gmail.com",
+      phone: "567-890-1234",
+      role: "customer",
+      createdAt: "2023-06-05T13:00:00Z",
+    },
+    {
+      id: 106,
+      name: "Diana Evans",
+      email: "dianaevans@gmail.com",
+      phone: "678-901-2345",
+      role: "customer",
+      createdAt: "2023-06-06T14:00:00Z",
+    },
+    {
+      id: 107,
+      name: "Ethan Foster",
+      email: "ethanfoster@gmail.com",
+      phone: "789-012-3456",
+      role: "customer",
+      createdAt: "2023-06-07T15:00:00Z",
+    },
+    {
+      id: 108,
+      name: "Fiona Green",
+      email: "fionagreen@gmail.com",
+      phone: "890-123-4567",
+      role: "customer",
+      createdAt: "2023-06-08T16:00:00Z",
+    },
+    {
+      id: 109,
+      name: "George Harris",
+      email: "georgeharris@gmail.com",
+      phone: "901-234-5678",
+      role: "customer",
+      createdAt: "2023-06-09T17:00:00Z",
+    },
+    {
+      id: 110,
+      name: "Hannah White",
+      email: "hannahwhite@gmail.com",
+      phone: "012-345-6789",
+      role: "customer",
+      createdAt: "2023-06-10T18:00:00Z",
+    },
+    {
+      id: 111,
+      name: "Ian King",
+      email: "ianking@gmail.com",
+      phone: "123-456-7890",
+      role: "customer",
+      createdAt: "2023-06-11T19:00:00Z",
+    },
+    {
+      id: 112,
+      name: "Julia Lee",
+      email: "julialee@gmail.com",
+      phone: "234-567-8901",
+      role: "customer",
+      createdAt: "2023-06-12T20:00:00Z",
+    }
+  ]
   
+
+
   export const tickets: Ticket[] = [
     {
       id: 1,

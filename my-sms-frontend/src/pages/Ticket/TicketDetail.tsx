@@ -6,8 +6,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '../../components/ui/textarea'
 import { Button } from '../../components/ui/button'
 import { getTicketTimeline } from '../../lib/data'
+import { useParams } from 'next/navigation'
 
 function TicketDetail() {
+  
     const timeline = getTicketTimeline(1)
     let ticket = {
         id: 1,
