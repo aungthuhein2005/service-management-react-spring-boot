@@ -23,7 +23,7 @@ function CustomAlert({ message, variant }) {
 
   return (
     <div>
-      <Alert variant={variant}>
+      <Alert variant={variant} >
         {icon}
         <AlertTitle>{title}</AlertTitle>
         <AlertDescription>{message}</AlertDescription>

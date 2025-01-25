@@ -25,6 +25,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
+import { log } from "console"
+import { getStatusColor } from "../utils/getStatusColor"
 
 export function TicketList() {
   const [ticketData, setTicketData] = useState<Ticket[]>(tickets)
@@ -42,6 +44,7 @@ export function TicketList() {
           `http://localhost:8484/api/tickets?page=${page-1}&size=${size}`
         )
         setTicketData(response.data.content) // ✅ Only store ticket list
+        console.log(response.data);
         setTotalPages(response.data.totalPages) // ✅ Save total pages
       } catch (error) {
         console.error("Error fetching tickets:", error)
@@ -54,18 +57,7 @@ export function TicketList() {
     fetchTickets()
   }, [page, size])
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Open":
-        return "bg-green-500"
-      case "Pending":
-        return "bg-yellow-500"
-      case "Resolved":
-        return "bg-blue-500"
-      default:
-        return "bg-gray-500"
-    }
-  }
+ 
 
   const getSLAStatus = (created: string, status: string) => {
     if (status === "Resolved") return null
@@ -104,15 +96,15 @@ export function TicketList() {
         </TableHeader>
         <TableBody>
           {ticketData.map((ticket) => (
-            <TableRow key={ticket.id}>
-              <TableCell>{ticket.id}</TableCell>
+            <TableRow key={ticket.ticket_id}>
+              <TableCell>{ticket.ticket_id}</TableCell>
               <TableCell>{ticket.subject}</TableCell>
               <TableCell>
                 <Badge className={getStatusColor(ticket.status)}>{ticket.status}</Badge>
                 {getSLAStatus(ticket.createdAt, ticket.status)}
               </TableCell>
               <TableCell>{new Date(ticket.createdAt).toLocaleString()}</TableCell>
-              {/* <TableCell>{ticket.assignedTo || "Unassigned"}</TableCell> */}
+              <TableCell>{ticket.assignedTo != null ? <Link to={`users/detail/${ticket.assignedTo.id}`}>{ticket.assignedTo.name }</Link>: "Unassigned"}</TableCell>
               <TableCell>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -124,7 +116,7 @@ export function TicketList() {
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                     <DropdownMenuItem>
-                      <Link to={`/tickets/${ticket.id}`}>View Details</Link>
+                      <Link to={`/tickets/${ticket.ticket_id}`}>View Details</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>View History</DropdownMenuItem>
                     <DropdownMenuItem>Update</DropdownMenuItem>
