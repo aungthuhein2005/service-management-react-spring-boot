@@ -1,4 +1,3 @@
-import { MessageCircle, UserCheck, AlertTriangle, CheckCircle2 } from "lucide-react"
 
 export type Ticket = {
     id: number;               // ticket_id
