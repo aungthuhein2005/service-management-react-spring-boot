@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MoreHorizontal, AlertCircle } from "lucide-react"
-import { type Ticket, tickets } from "@/lib/data"
+import { type Ticket } from "@/lib/data"
 import { Link } from "react-router-dom"
 import CustomAlert from "./CustomAlert"
 import {
@@ -29,8 +29,8 @@ import { log } from "console"
 import { getStatusColor } from "../utils/getStatusColor"
 
 export function TicketList() {
-  const [ticketData, setTicketData] = useState<Ticket[]>(tickets)
-  const [error, setError] = useState(false)
+  const [ticketData, setTicketData] = useState<Ticket[]>()
+  const [error, setError] = useState({status: false, message: ""})
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [size, setSize] = useState(10)
@@ -48,7 +48,7 @@ export function TicketList() {
         setTotalPages(response.data.totalPages) // ✅ Save total pages
       } catch (error) {
         console.error("Error fetching tickets:", error)
-        setError(true)
+        setError({status: true, message: error.message})
       } finally {
         setLoading(false)
       }
@@ -82,7 +82,7 @@ export function TicketList() {
 
   return (
     <>
-      {error && <CustomAlert message="Error fetching tickets" variant="error" />}
+      {error.status && <div className="my-2"><CustomAlert message={error.message} variant="error" /></div>}
       <Table>
         <TableHeader>
           <TableRow>
@@ -95,7 +95,7 @@ export function TicketList() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {ticketData.map((ticket) => (
+          {ticketData && ticketData.map((ticket) => (
             <TableRow key={ticket.ticket_id}>
               <TableCell>{ticket.ticket_id}</TableCell>
               <TableCell>{ticket.subject}</TableCell>

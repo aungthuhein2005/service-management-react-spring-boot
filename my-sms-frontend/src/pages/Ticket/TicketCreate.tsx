@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Card } from '@/components/ui/card';
 import { Input } from '../../components/ui/input';
@@ -10,12 +10,26 @@ import { Form, FormControl, FormItem, FormLabel, FormMessage } from '../../compo
 import { Button } from '../../components/ui/button';
 import { Link } from 'react-router-dom';
 import { MoveLeft } from "lucide-react";
+import axios from 'axios';
 function CreateTicket() {
   const [category, setCategory] = useState('');
   const [priority, setPriority] = useState('');
   const [assignee, setAssignee] = useState('');
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
+  const [technicians, setTechnicians] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/users/technicians')
+    .then(res => {
+      console.log(res.data);
+      setTechnicians(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }, [])
+
 
   return (
     <div>
@@ -94,9 +108,11 @@ function CreateTicket() {
                   <SelectValue placeholder="Assign To" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="assignee1">Assignee 1</SelectItem>
-                  <SelectItem value="assignee2">Assignee 2</SelectItem>
-                  <SelectItem value="assignee3">Assignee 3</SelectItem>
+                  {
+                    technicians.map(technician => (
+                      <SelectItem key={technician.id} value={technician.id}>{technician.name}</SelectItem>
+                    ))
+                  }
                 </SelectContent>
               </Select>
             </FormControl>

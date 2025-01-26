@@ -11,13 +11,18 @@ const alertVariants = cva(
         default: "bg-background text-foreground",
         destructive:
           "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+        success: "bg-green-100 text-green-800",
+        info: "bg-blue-100 text-blue-800",
+        warning: "bg-yellow-100 text-yellow-800",
+        error: "bg-red-100 text-red-800",
       },
     },
     defaultVariants: {
       variant: "default",
     },
   }
-)
+);
+
 
 const Alert = React.forwardRef<
   HTMLDivElement,
