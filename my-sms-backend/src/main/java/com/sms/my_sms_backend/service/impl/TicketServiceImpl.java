@@ -127,7 +127,7 @@ public class TicketServiceImpl implements TicketService {
     	            ))
     	            .collect(Collectors.toList());
         return new TicketDTO(
-        		ticket.getId(),
+        		ticket.getTicket_id(),
                 user,
                 ticket.getSubject(),
                 ticket.getDescription(),

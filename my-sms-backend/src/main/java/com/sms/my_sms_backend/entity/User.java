@@ -27,7 +27,7 @@ public class User {
 	private String email;
 
 	@Enumerated(EnumType.STRING)
-	private Role role = Role.Customer;
+	private Role role = Role.CUSTOMER;
 
 	private String phone;
 

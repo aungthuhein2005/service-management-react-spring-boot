@@ -11,7 +11,7 @@ import { Button } from '../../components/ui/button';
 import { Link } from 'react-router-dom';
 import { MoveLeft } from "lucide-react";
 function CreateTicket() {
-  const [category, setCategory] = useState('');
+  const [service, setService] = useState('');
   const [priority, setPriority] = useState('');
   const [assignee, setAssignee] = useState('');
   const [subject, setSubject] = useState('');
@@ -53,16 +53,16 @@ function CreateTicket() {
           </FormItem>
 
           <FormItem>
-            <FormLabel>Category</FormLabel>
+            <FormLabel>Services</FormLabel>
             <FormControl>
-              <Select value={category} onValueChange={setCategory}>
+              <Select value={service} onValueChange={setService}>
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select Category" />
+                  <SelectValue placeholder="Select Service" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="category1">Category 1</SelectItem>
-                  <SelectItem value="category2">Category 2</SelectItem>
-                  <SelectItem value="category3">Category 3</SelectItem>
+                  <SelectItem value="service1">Service 1</SelectItem>
+                  <SelectItem value="service2">Service 2</SelectItem>
+                  <SelectItem value="service3">Service 3</SelectItem>
                 </SelectContent>
               </Select>
             </FormControl>

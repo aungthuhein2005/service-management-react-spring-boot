@@ -41,7 +41,7 @@ export function TicketList() {
       setLoading(true)
       try {
         const response = await axios.get(
-          `http://localhost:8484/api/tickets?page=${page-1}&size=${size}`
+          `/api/tickets?page=${page-1}&size=${size}`
         )
         setTicketData(response.data.content) // ✅ Only store ticket list
         console.log(response.data);

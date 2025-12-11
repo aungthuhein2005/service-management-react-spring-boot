@@ -18,7 +18,17 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name="tickets")
 public class Ticket {
@@ -34,7 +44,7 @@ public class Ticket {
 	private Status status = Status.OPEN;
 	
 	@Enumerated(EnumType.STRING)
-	private Priority priority = Priority.Medium;
+	private Priority priority = Priority.MEDIUM;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id",nullable = false)
@@ -54,111 +64,11 @@ public class Ticket {
 	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
 
-    // Other fields...
+	@ManyToOne
+	@JoinColumn(name = "service_id", nullable = false)
+	private Service service;
 
-    // Getters and setters
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-	
-	@PrePersist
-	protected void onCreate() {
-		createdAt = LocalDateTime.now();
-		updatedAt = LocalDateTime.now();
-	}
-	
-	@PreUpdate
-	protected void onUpdate() {
-		updatedAt = LocalDateTime.now();
-	}
-	
-	public Ticket() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Long getId() {
-		return ticket_id;
-	}
-
-	public void setId(Long id) {
-		this.ticket_id = id;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public Priority getPriority() {
-		return priority;
-	}
-
-	public void setPriority(Priority priority) {
-		this.priority = priority;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public User getAssignedTo() {
-		return assignedTo;
-	}
-
-	public void setAssignedTo(User assignedTo) {
-		this.assignedTo = assignedTo;
-	}
-
-	public LocalDateTime getSlaDueDate() {
-		return slaDueDate;
-	}
-
-	public void setSlaDueDate(LocalDateTime slaDueDate) {
-		this.slaDueDate = slaDueDate;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+    
 	
 	 
 }
